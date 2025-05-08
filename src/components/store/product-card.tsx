@@ -31,9 +31,14 @@ export const ProductCard = ({ product }: ProductCartProps) => {
             {product.description}
           </Text>
         </VStack>
-        <Text marginTop={2} textAlign="right" fontSize="xl" fontWeight="bold">
-          ${product.price}
-        </Text>
+        <Flex width="100%" justifyContent="flex-end" alignItems="center" gap={1}>
+          <Text marginTop={2} fontSize="xl" fontWeight="bold">
+            ${product.price / 100}
+          </Text>
+          <Text fontSize="sm" fontWeight="semibold" textTransform="uppercase">
+            {product.currency}
+          </Text>
+        </Flex>
       </Flex>
     </Flex>
   )
