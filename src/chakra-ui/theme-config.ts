@@ -16,6 +16,8 @@ const config = defineConfig({
       colors: {
         primary: { value: "#2c3e50" },
         secondary: { value: "#2e84bf" },
+        primaryHover: { value: "rgba(44, 62, 80, 0.8)" },
+        secondaryHover: { value: "rgba(46, 132, 191, 0.75)" },
         neutral: {
           50: { value: "#F1F1F3" },
           100: { value: "#E4E4E7" },

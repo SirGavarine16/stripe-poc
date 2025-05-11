@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { UIProvider } from "app/chakra-ui";
+import { GlobalProvider } from "app/hooks";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +27,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <UIProvider>
-          {children}
+          <GlobalProvider>
+            {children}
+          </GlobalProvider>
         </UIProvider>
       </body>
     </html>

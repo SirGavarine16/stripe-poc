@@ -1,17 +1,22 @@
+"use client";
+
 import { Box, Flex, Text, TextProps } from "@chakra-ui/react";
-import { StoreURL } from "app/types";
 import Link from "next/link";
+import { useGlobal } from "app/hooks";
+import { StoreURL } from "app/types";
 
 const storeURLs: StoreURL[] = [
-  { label: "Home", href: null },
+  { label: "Home", href: "/" },
   { label: "About Us", href: null },
-  { label: "Store", href: null },
+  { label: "Store", href: "/" },
   { label: "Blog", href: null },
-  { label: "Account", href: null },
-  { label: "Cart", href: null }
+  { label: "Account", href: "/account" },
+  { label: "Cart", href: "/cart" }
 ]
 
 export const StoreHeader = () => {
+  const { cart } = useGlobal().useCart;
+
   return (
     <Box width="100%">
       <Flex justify="center" paddingY={2} gap={1}>
@@ -44,15 +49,17 @@ export const StoreHeader = () => {
             }
           }
 
+          const label = `${storeURL.label} ${storeURL.label === "Cart" ? `(${cart.length})` : ''}`
+
           if (storeURL.href) {
             return (
               <Link key={key} href={storeURL.href}>
-                <Text {...textProps}>{storeURL.label}</Text>
+                <Text {...textProps}>{label}</Text>
               </Link>
             );
           }
           return (
-            <Text key={key} {...textProps}>{storeURL.label}</Text>
+            <Text key={key} {...textProps}>{label}</Text>
           )
         })}
       </Flex>

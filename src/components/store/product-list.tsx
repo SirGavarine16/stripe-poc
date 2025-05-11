@@ -3,21 +3,19 @@
 import { useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { Center, Grid, GridItem, Text } from "@chakra-ui/react"
-import StoreData from "app/constants/data.json";
 import { ProductCard } from "app/components/store/product-card";
+import { useGlobal } from "app/hooks";
 
-const { products } = StoreData;
 
 export const ProductList = () => {
+  const { fetchProducts } = useGlobal().useGetProducts;
   const searchParams = useSearchParams();
 
   const categoryInParams = searchParams.get("category");
 
   const displayedProducts = useMemo(() => {
-    if (categoryInParams) {
-      return products.filter((product) => product.category === categoryInParams);
-    }
-    return products;
+    return fetchProducts(categoryInParams ? { category: categoryInParams } : {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryInParams]);
 
   return (
@@ -38,8 +36,8 @@ export const ProductList = () => {
           </Center>
         </GridItem>
       ) : (
-        displayedProducts.map((product, index) => (
-          <ProductCard key={`product_${index}`} product={product} />
+        displayedProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))
       )}
 

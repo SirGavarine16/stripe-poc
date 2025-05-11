@@ -3,12 +3,20 @@ export type StoreURL = {
   href: string | null;
 };
 
-export type ProductData = {
+export type CustomerData = {
+  id: string;
+  email: string;
   name: string;
+};
+
+export type ProductData = {
+  id: string;
+  name: string;
+  description: string;
   image: string;
   brand: string;
   category: string;
-  description: string;
   price: number;
+  priceId: string;
   currency: string;
 };

@@ -1,6 +1,7 @@
 import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 import { ProductData } from "app/types"
 import Image from "next/image";
+import { QuantityPicker } from "./quantity-picker";
 
 type ProductCartProps = {
   product: ProductData;
@@ -39,6 +40,9 @@ export const ProductCard = ({ product }: ProductCartProps) => {
             {product.currency}
           </Text>
         </Flex>
+        <Box width="100%" marginTop={3}>
+          <QuantityPicker productId={product.id} />
+        </Box>
       </Flex>
     </Flex>
   )

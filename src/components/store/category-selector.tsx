@@ -3,15 +3,21 @@
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import StoreData from "app/constants/data.json";
-
-const { productCategories, products } = StoreData;
+import { useGlobal } from "app/hooks";
+import { useMemo } from "react";
 
 export const CategorySelector = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { fetchCategories, fetchProducts } = useGlobal().useGetProducts;
 
   const categoryInParams = searchParams.get("category");
+  const products = useMemo(() => {
+    return fetchProducts();
+  }, [fetchProducts])
+  const productCategories = useMemo(() => {
+    return fetchCategories();
+  }, [fetchCategories]);
 
   return (
     <Box width="100%">
